@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="HangDieuChuyen" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="4e86487b-a363-4bc9-8c27-36c15da8eaf2">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[select (SELECT TENKHO FROM KHO WHERE MAKHO=A.MAKHOCHUYEN)AS 'kHOCUYEN',(SELECT TENKHO FROM KHO WHERE MAKHO=A.MAKHODEN)AS 'kHONHAN'
+,C.TENMH, B.SOLUONG,(CONVERT(VARCHAR(10),MONTH(GETDATE()))+'')as  'MONTH'
+ from PHIEUDIEUCHUYEN AS A INNER JOIN CHITIETDIEUCHUYEN AS B ON A.SOPHIEU=B.SOPHIEU
+INNER JOIN HANG AS C ON C.MAMH=B.MAMH
+WHERE MONTH(GETDATE())=MONTH(A.NGAY)]]>
+	</queryString>
+	<field name="kHOCUYEN" class="java.lang.String"/>
+	<field name="kHONHAN" class="java.lang.String"/>
+	<field name="TENMH" class="java.lang.String"/>
+	<field name="SOLUONG" class="java.lang.Integer"/>
+	<field name="MONTH" class="java.lang.Integer"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="62" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="31" width="555" height="20" uuid="50c94a6f-ae78-4088-a341-f8a47bf7c811"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Độc Lập - Tự Do - Hạnh Phúc]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="5" width="555" height="20" uuid="66ac480b-260b-43d3-9955-90d2b181a876"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<text><![CDATA[Cộng Hòa Xã Hội Chủ Nghĩa Việt Nam]]></text>
+			</staticText>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="58" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="555" height="57" uuid="e96e4460-ef51-4359-96d9-a9af3b2da1ee"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="30"/>
+				</textElement>
+				<text><![CDATA[Phiếu Điều Chuyển Hàng]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="76" splitType="Stretch">
+			<textField pattern="MMM">
+				<reportElement x="88" y="3" width="203" height="33" uuid="7d9450ab-3cca-4955-a485-3648c216857b"/>
+				<textElement>
+					<font size="18" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{MONTH}.toString()]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="279" y="39" width="139" height="34" uuid="f6e85fa4-6df8-4b5d-8e5c-cfc448361586"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Kho Chuyển]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="39" width="139" height="34" uuid="f0178600-7c2d-4424-8543-bc26c415f622"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Tên Mặt Hàng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="140" y="39" width="137" height="34" uuid="14cccdf7-464e-4b46-8795-c402b0fd84a5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Số Lượng]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="420" y="39" width="135" height="34" uuid="e5096d89-a8b7-4a98-9e56-c8297cd016e4"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14" isBold="true" isItalic="false"/>
+				</textElement>
+				<text><![CDATA[Kho Nhận]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="4" width="76" height="33" uuid="f8964918-8bbe-4aba-99b8-15c00071ec76"/>
+				<textElement textAlignment="Right">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Tháng:]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="34" splitType="Stretch">
+			<textField>
+				<reportElement x="140" y="0" width="138" height="33" uuid="56ecc2a1-c826-4731-b7b5-b2a9bdc4a0ca"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{SOLUONG}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="421" y="0" width="135" height="33" uuid="23bee840-f3f8-4045-86e5-be7e71ea6515"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kHONHAN}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="1" y="0" width="139" height="33" uuid="75a6a005-cdae-461d-909b-79086ffd8340"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+					<paragraph lineSpacing="1_1_2"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{TENMH}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="278" y="0" width="143" height="33" uuid="3e9eea5b-0696-49fb-a401-89c6aeb4dace"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{kHOCUYEN}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch">
+			<staticText>
+				<reportElement x="321" y="22" width="234" height="32" uuid="7801314b-a5d1-4c79-bcf4-650e778cb94f"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isItalic="true"/>
+				</textElement>
+				<text><![CDATA[Người lập]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="321" y="2" width="234" height="18" uuid="2b0bdc8e-f343-4fa4-b89d-2ba8d9805cf4"/>
+				<textElement textAlignment="Center">
+					<font size="14"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>
